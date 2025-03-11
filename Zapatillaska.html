@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Style - Beanie Bordado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(252, 247, 247, 0.9); /* Fondo semi-transparente para mejorar visibilidad */
+            padding: 15px 0;
+            z-index: 1; /* Asegura que la navbar esté encima del video */
+        }
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
+            transition: color 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .navbar a:hover {
+            color: #a8936d;
+        }
+        .logo {
+            font-size: 45px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .logo span {
+            display: block;
+            font-size: 24px;
+            font-weight: 400;
+        }
+        .dropdown-section {
+            display: none;
+            background: rgba(252, 247, 247, 0.9); /* Fondo semi-transparente para mejorar visibilidad */
+            padding: 40px;
+            position: absolute;
+            top: 122px;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        .dropdown-section.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .dropdown-content-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .dropdown-text {
+            flex: 1;
+            padding-left: 10px;
+            padding-top: 10px;
+        }
+        .dropdown-text a {
+            display: block;
+            margin: 5px 0;
+            text-decoration: none;
+            color: black;
+            font-size: 24px;
+            font-weight: 400;
+        }
+        .dropdown-text a span {
+            background: black;
+            color: white;
+            padding: 2px 5px;
+            font-size: 10px;
+        }
+        .dropdown-images {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            justify-content: flex-end;
+            padding-right: 150px;
+        }
+        .dropdown-images img {
+            width: 170px;
+            height: 230px;
+            border-radius: 20px;
+        }   
+        .container {
+            display: flex;
+            padding: 40px;
+            justify-content: space-between;
+        }
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-width: 50%;
+        }
+        .images img {
+            width: 48%;
+            border-radius: 5px;
+        }
+        .product-details {
+            max-width: 40%;
+        }
+        .product-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .button {
+            background: #008f4c;
+            color: white;
+            padding: 12px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+        }
+        .info-box {
+            padding: 15px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .free-shipping {
+            color: green;
+            font-weight: 700;
+        }
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: right 0.3s ease;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .sidebar.active {
+            right: 0;
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .sidebar img {
+            width: 70px;
+            height: auto;
+            border-radius: 5px;
+        }
+        .sidebar .checkout-button {
+            background: #008f4c;
+            color: white;
+            padding: 12px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#" onclick="toggleDropdown('novedades-section')">Novedades</a>
+    <a href="#" onclick="toggleDropdown('catalogo-section')">Catálogo</a>
+    <a href="#" onclick="toggleDropdown('nova-style-section')">Nova Style</a>
+    <div class="logo" onclick="location.href='index.html'">NOVA <span>STYLE</span></div>
+    <a href="#">Descuentos</a>
+    <a href="#">Carrito</a>
+    <a href="#">Mi Cuenta</a>
+</nav>
+
+<div id="novedades-section" class="dropdown-section">
+    <div class="dropdown-content-container">
+        <div class="dropdown-text">
+            <a href="#">ACCESO RÁPIDO A LA IA DE OUTFITS <span>PRO</span></a>
+            <a href="#">SECCIÓN A NOVEDADES Y COLECCIONES POPULARES</a>
+            <a href="#">FILTROS RÁPIDOS</a>
+        </div>
+        <div class="dropdown-images">
+            <img src="https://static.bershka.net/assets/public/e87e/f94b/aa5d42b3bd69/0e079b8fa7a9/cescawilkinson_5d815b58006d984c1349/cescawilkinson_5d815b58006d984c1349.jpg" alt="Imagen de Novedades">
+            <img src="https://static.bershka.net/assets/public/3f25/2c0e/537945fdb883/dd48d2f816ec/emmafrmx__bebc8a3ad28b8c1023d1/emmafrmx__bebc8a3ad28b8c1023d1.jpg?ts=1741022791279&w=375&ts=20250309015705" alt="" srcset="Imagen de Novedades">
+            <img src="https://static.bershka.net/assets/public/3e34/18e5/97d348c5a532/ecca18a3010b/miniveorra_c8cc0be4f564abe027be/miniveorra_c8cc0be4f564abe027be.jpg?ts=1741022791604&w=375&ts=20250309015705" alt="" srcset="Imagen de Novedades">
+            <img src="https://static.bershka.net/assets/public/1650/45e7/ef7340e88790/05eff31387d3/saraoriana_36d30f48a6c43f9dc988-copia/saraoriana_36d30f48a6c43f9dc988-copia.jpg?ts=1741022790386&w=375&ts=20250309015705" alt="" srcset="Imagen de Novedades">
+        </div>
+    </div>
+</div>
+
+<div id="catalogo-section" class="dropdown-section">
+  <div class="dropdown-content-container">
+      <div class="dropdown-text">
+          <a href="#">HOMBRE</a>
+          <a href="#">MUJER</a>
+          <a href="#">ACCESORIOS</a>
+          <a href="#">CALZADO</a> <!-- Aquí actualizamos el enlace -->
+          <a href="#">AVANZADO-FILTROS <span>PRO</span></a>
+          <a href="#">IA <span>PRO</span></a>
+      </div>
+      <div class="dropdown-images">
+          <img src="https://static.pxlecdn.com/photos/719781703/xl/0dfc1a6fd33230720150.jpg" alt="Imagen de Catálogo">
+          <img src="https://static.pxlecdn.com/photos/717080161/xl/f24b9f5c056de67cb3cc.jpg" alt="Imagen de Catálogo">
+          <img src="https://static.pxlecdn.com/photos/717044705/xl/2b87a0af728a409dd2de.jpg" alt="Imagen de Catálogo">
+          <img src="https://static.pxlecdn.com/photos/717931441/xl/876425389dec62412d5b.jpg" alt="Imagen de Catálogo">
+      </div>
+  </div>
+</div>
+
+<div id="nova-style-section" class="dropdown-section">
+  <div class="dropdown-content-container">
+      <div class="dropdown-text">
+          <a href="#">TENDENCIAS ACTUALES EN MODA</a>
+          <a href="#">RECOMENDACIONES POPULARES</a>
+          <a href="#">NUEVOS LANZAMIENTOS</a>
+          <a href="#">COLABORACIONES</a>
+      </div>
+      <div class="dropdown-images">
+          <img src="https://static.pxlecdn.com/photos/719326770/xl/f36e0256cb0c56b2ea1e.jpg" alt="" srcset="">
+          <img src="https://static.pxlecdn.com/photos/717216097/xl/b4b54896327bc0215137.jpg" alt="Imagen de Nova Style">
+          <img src="https://static.pxlecdn.com/photos/719838541/xl/c6700146a7e92b6d2229.jpg" alt="" srcset="">
+          <img src="https://static.pxlecdn.com/photos/717247760/xl/5fd11ebf9c0636ecd5b4.jpg" alt="" srcset="">
+      </div>
+  </div>
+</div>
+    <div class="container">
+      <div class="images">
+        <img src="https://static.bershka.net/assets/public/161f/883d/43c7405598e9/3a6cc114453f/12485560100-a4o/12485560100-a4o.jpg?ts=1739531484483&w=800" alt="Imagen 1">
+        <img src="https://static.bershka.net/assets/public/39f3/6415/4a8945229766/67a6470f2078/12485560100-a2d/12485560100-a2d.jpg?ts=1739531484414&w=800" alt="Imagen 2">
+        <img src="https://static.bershka.net/assets/public/1107/3e63/59034df18908/1198cc2069a7/12485560100-a1t/12485560100-a1t.jpg?ts=1739531484637&w=1920" alt="Imagen 3">
+        <img src="https://static.bershka.net/assets/public/9f4e/4c49/69e54da6bdbe/25bbf56c3a87/12485560100-a3o/12485560100-a3o.jpg?ts=1739531484985&w=1920" alt="Imagen 4">
+    </div>
+        <div class="product-details">
+            <h1 class="product-title">BEANIE BORDADO</h1>
+            <p class="price">MXN 299.00</p>
+            <p>NEGRO - REF. 9263/800</p>
+            <button class="button" onclick="toggleSidebar()">AÑADIR A LA CESTA</button>
+            <div class="info-box">COMPOSICIÓN, CUIDADOS Y ORIGEN</div>
+            <div class="info-box">DISPONIBILIDAD EN TIENDA</div>
+            <div class="info-box">ENVÍOS Y DEVOLUCIONES</div>
+            <div class="info-box free-shipping">ENVÍO A DOMICILIO - GRATIS</div>
+        </div>
+    </div>
+    
+    <div class="sidebar" id="cart-sidebar">
+        <div class="sidebar-header">
+            <span>Producto añadido</span>
+            <button onclick="toggleSidebar()">✖</button>
+        </div>
+        <div>
+            <img src="https://static.bershka.net/assets/public/161f/883d/43c7405598e9/3a6cc114453f/12485560100-a4o/12485560100-a4o.jpg?ts=1739531484483&w=800" alt="Producto">
+            <p><strong>MXN 1,199.00</strong><br>Náutico suela chunky<br>Talla 26½</p>
+        </div>
+        <button class="checkout-button">Tramitar Pedido</button>
+        <button class="checkout-button" style="background: white; color: black; border: 1px solid black;">Ver Cesta (2)</button>
+    </div>
+    
+    <script>
+        function toggleSidebar() {
+            document.getElementById('cart-sidebar').classList.toggle('active');
+        }
+        
+        function toggleDropdown(sectionId) {
+            // Cierra todas las secciones primero
+            const sections = document.querySelectorAll('.dropdown-section');
+            sections.forEach((section) => {
+                if (section.id !== sectionId) {
+                    section.classList.remove('active');
+                }
+            });
+
+            // Ahora abre la sección que se ha clicado
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
+
